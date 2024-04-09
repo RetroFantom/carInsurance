@@ -1,8 +1,9 @@
 package ru.micro.carinsurance.securityjwt.entities;
 
-import jakarta.persistence.*;
+
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.Collection;
 
 @Entity

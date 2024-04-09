@@ -1,12 +1,14 @@
 package ru.micro.carinsurance.securityjwt.entities;
 
-import jakarta.persistence.*;
+
 import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
 @Data
 @Table(name = "roles")
-public class Role {
+public class Role{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
