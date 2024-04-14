@@ -27,6 +27,8 @@ public class JwtTokenUtils {
             .collect(Collectors.toList());
     claims.put("roles", rolesList);
     //claims.put("email", email); можно изменить под своего юзера и в аргумент его запихнуть
+        //....
+        //....
         Date issuedDate = new Date();
         Date expiredDate = new Date(issuedDate.getTime() + jwtLifetime.toMillis());
     return Jwts.builder()
