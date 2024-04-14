@@ -1,6 +1,7 @@
 package ru.micro.carinsurance.securityjwt.configs;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,11 +20,19 @@ import ru.micro.carinsurance.securityjwt.services.UserService;
 import static javax.management.Query.and;
 
 @EnableWebSecurity
-@RequiredArgsConstructor
+
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
-    private final UserService userService;
-    private final JwtRequestFilter jwtRequestFilter;
+    private  UserService userService;
+    private  JwtRequestFilter jwtRequestFilter;
+
+    @Autowired
+    public void setUserService(UserService userService){
+        this.userService=userService;
+    }
+    @Autowired void setJwtRequestFilter(JwtRequestFilter jwtRequestFilter){
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

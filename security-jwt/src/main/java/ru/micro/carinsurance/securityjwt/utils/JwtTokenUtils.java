@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenUtils {
-    @Value("{jwt.secret}")
+    @Value("${jwt.secret}")
     private String secret;
 
     @Value("${jwt.lifetime}")
