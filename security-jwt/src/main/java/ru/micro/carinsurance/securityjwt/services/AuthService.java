@@ -31,12 +31,12 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService{
+public class AuthService {
     private final UserService userService;
     private final JwtTokenUtils jwtTokenUtils;
     private final AuthenticationManager authenticationManager;
 
-    public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest){
+    public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         } catch (BadCredentialsException e) {
@@ -48,15 +48,13 @@ public class AuthService{
     }
 
     public ResponseEntity<?> createNewUser(@RequestBody RegistrationUserDto registrationUserDto) {
-        if (!registrationUserDto.getPassword().equals(registrationUserDto.getConfirmPassword())){
-            return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), "Пароль не совпадает"), HttpStatus.BAD_REQUEST);
+        if (!registrationUserDto.getPassword().equals(registrationUserDto.getConfirmPassword())) {
+            return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), "Пароли не совпадают"), HttpStatus.BAD_REQUEST);
         }
-        if (userService.findByUsername((registrationUserDto.getUsername())).isPresent()){
-            return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), "Пароль c указанным именем уже существует"), HttpStatus.BAD_REQUEST);
+        if (userService.findByUsername(registrationUserDto.getUsername()).isPresent()) {
+            return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), "Пользователь с указанным именем уже существует"), HttpStatus.BAD_REQUEST);
         }
-
         User user = userService.createNewUser(registrationUserDto);
         return ResponseEntity.ok(new UserDto(user.getId(), user.getUsername(), user.getEmail()));
     }
-
 }
