@@ -1,7 +1,7 @@
 server:
   port: 9091
 jwt:
-  secret: zalupaNegra
+  secret: fkpoewj0pjg0j4owifjoilpfe
   lifetime: 10m
 spring:
   datasource:
@@ -11,3 +11,7 @@ spring:
     password: postgres
   main:
     allow-circular-references: true
+  thymeleaf:
+    cache: false
+  application:
+    name: authService
