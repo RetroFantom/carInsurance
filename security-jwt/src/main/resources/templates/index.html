@@ -1,18 +1,57 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" content="text/html">
-    <link rel="stylesheet" type="text/css" href="../static/public/css/mainstyle.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Автострахование</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body>
-<div class="wrapper">
-<div class="upperBlock">
-    <figure class="fg1">
-        <img src="../static/public/images/icon.jpg" alt="mainpage">
-    </figure>
-</div>
-</div>
+<section class="vh-100 bg-image"
+         style="background-image: url('scale_1200.jpg');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Регистрация</h2>
+                            <form>
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example1cg">Имя</label>
+                                </div>
+
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example3cg">Email</label>
+                                </div>
+
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example4cg">Пароль</label>
+                                </div>
+
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example4cdg">Подтвердите пароль</label>
+                                </div>
+
+
+                                <p class="text-center text-muted mt-5 mb-0">Уже зарегистрированы? <a href="#!"
+                                                                                                        class="fw-bold text-body"><u>Войти</u></a></p>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+#<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html>
