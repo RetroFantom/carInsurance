@@ -30,3 +30,16 @@ spring:
      uri: http://localhost:9091
      predicates:
        - Path=/auth
+   - id: login
+     uri: http://localhost:9091
+     predicates:
+       - Path=/login
+       - Path=/success-login
+   - id: home
+     uri: http://localhost:9091
+     predicates:
+       - Path=/
+   - id: /styles/css/
+
+ application:
+   name: gateway

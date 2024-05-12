@@ -36,15 +36,25 @@ public class AuthService {
     private final JwtTokenUtils jwtTokenUtils;
     private final AuthenticationManager authenticationManager;
 
-    public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
-        try {
+  //  public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
+   //     try {
+   //         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+   //     } catch (BadCredentialsException e) {
+   //         return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), "Неправильный логин или пароль"), HttpStatus.UNAUTHORIZED);
+   //     }
+  //      UserDetails userDetails = userService.loadUserByUsername(authRequest.getUsername());
+  //      String token = jwtTokenUtils.generateToken(userDetails);
+  //      return ResponseEntity.ok(new JwtResponse(token));
+  //  }
+    public JwtResponse createAuthToken(@RequestBody JwtRequest authRequest) {
+       // try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-        } catch (BadCredentialsException e) {
-            return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), "Неправильный логин или пароль"), HttpStatus.UNAUTHORIZED);
-        }
+       // } catch (BadCredentialsException e) {
+        //    return new JwtResponse(new AppError(HttpStatus.UNAUTHORIZED.value(), "Неправильный логин или пароль"), HttpStatus.UNAUTHORIZED);
+       // }
         UserDetails userDetails = userService.loadUserByUsername(authRequest.getUsername());
         String token = jwtTokenUtils.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token));
+        return (new JwtResponse(token));
     }
 
     public ResponseEntity<?> createNewUser(@RequestBody RegistrationUserDto registrationUserDto) {

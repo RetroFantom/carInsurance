@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Автострахование</title>
+    <link rel="stylesheet" type="text/css" href="/styles/css/mainstyle.css"/>
+</head>
+<body>
+<div class="upper" style="border-style: double">
+    <a href="/"><img src="/images/img.png" alt="Здесь логотип" class="logoImg"></a>
+    <section id="tl"><span class="head">Автострахование у Сереги</span></section>
+    <ul class="nav">
+        <li><a href="/login">Войти в систему</a></li>
+        <li><a href="/registration">Зарегистрироваться</a></li>
+    </ul>
+</div>
+<h1>Вы успешно авторизовались</h1>
+</body>
+<script th:inline="javascript">
+    let token = [[${token.token}]];
+    localStorage.setItem('token', token);
+</script>
+</html>

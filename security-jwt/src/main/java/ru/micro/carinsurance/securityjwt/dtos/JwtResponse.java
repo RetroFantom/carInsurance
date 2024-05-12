@@ -7,4 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class JwtResponse {
 private String token;
+
+public JwtResponse(JwtResponse jwtResponse){
+    this.token=jwtResponse.token;
+}
 }
