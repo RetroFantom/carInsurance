@@ -22,7 +22,7 @@ public class AuthController {
   //       authService.createAuthToken(authRequest);
    //      return "index";
     //}
-    @RequestMapping("/auth")
+    @PostMapping("/login")
     public String aut(JwtRequest authRequest, Model model){
         //String str= authService.createAuthToken(authRequest).toString();
         JwtResponse jwtResponse = new JwtResponse(authService.createAuthToken(authRequest));
@@ -33,13 +33,12 @@ public class AuthController {
 public String main(){ return  "index";}
     @RequestMapping("/registration")
     public String registration(){ return "registration";}
-
     @RequestMapping("/login")
     public String login(){ return "login";}
-    @RequestMapping("/addInsurance")
-    public String addInsurance(){ return "addInsurance";}
+
     @PostMapping("/registration")
-    public ResponseEntity<?> createNewUser(RegistrationUserDto registrationUserDto) {
-        return authService.createNewUser(registrationUserDto);
+    public String createNewUser(RegistrationUserDto registrationUserDto) {
+        authService.createNewUser(registrationUserDto);
+        return "index";
     }
 }

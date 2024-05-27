@@ -25,6 +25,13 @@ import ru.micro.carinsurance.securityjwt.repositories.RoleRepository;
 import ru.micro.carinsurance.securityjwt.repositories.UserRepository;
 import ru.micro.carinsurance.securityjwt.utils.JwtTokenUtils;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,6 +42,27 @@ public class AuthService {
     private final UserService userService;
     private final JwtTokenUtils jwtTokenUtils;
     private final AuthenticationManager authenticationManager;
+
+    public static void audit(String str){
+        try {
+            URL url = new URL("http://localhost:9092/audit");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+
+            String params = "INFO=" + str;
+            byte[] postData = params.getBytes(StandardCharsets.UTF_8);
+
+            try (DataOutputStream wr = new DataOutputStream(conn.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
   //  public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
    //     try {
@@ -54,17 +82,21 @@ public class AuthService {
        // }
         UserDetails userDetails = userService.loadUserByUsername(authRequest.getUsername());
         String token = jwtTokenUtils.generateToken(userDetails);
+        audit("Token created");
         return (new JwtResponse(token));
     }
 
     public ResponseEntity<?> createNewUser(@RequestBody RegistrationUserDto registrationUserDto) {
         if (!registrationUserDto.getPassword().equals(registrationUserDto.getConfirmPassword())) {
+            audit("Password mismatch");
             return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), "Пароли не совпадают"), HttpStatus.BAD_REQUEST);
         }
         if (userService.findByUsername(registrationUserDto.getUsername()).isPresent()) {
+            audit("User already exists");
             return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), "Пользователь с указанным именем уже существует"), HttpStatus.BAD_REQUEST);
         }
         User user = userService.createNewUser(registrationUserDto);
-        return ResponseEntity.ok(new UserDto(user.getId(), user.getUsername(), user.getEmail()));
+        audit("New user added");
+        return ResponseEntity.ok(new UserDto(user.getId(), user.getUsername()));
     }
 }

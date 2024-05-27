@@ -21,13 +21,13 @@
         <div class="container h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                    <div class="card" style="border-radius: 15px;">
-                        <div class="card-body p-5">
+                    <div class="insurance" style="border-radius: 15px;">
+                        <div class="insurance-body p-5">
                             <h2 class="text-uppercase text-center mb-5">Регистрация</h2>
                             <form class="registration" th:action="@{/registration}" th:object="${RegistrationUserDto}" method="POST">
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <input type="text" id="form3Example1cg" name="username" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example1cg">Имя</label>
+                                    <input type="email" id="form3Example1cg" name="username" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example1cg">Почта</label>
                                 </div>
 
                                 <div data-mdb-input-init class="form-outline mb-4">
@@ -40,11 +40,8 @@
                                     <label class="form-label" for="form3Example4cdg">Подтвердите пароль</label>
                                 </div>
 
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <input type="email" id="form3Example3cg" name="email" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example3cg">Email</label>
-                                </div>
-                                <div class="sub"><input class="reg" type="submit" value="Регистрация" /></div>
+
+                                <div class="sub"><input class="reg" type="submit" value="Регистрация"/></div>
                                 <p class="text-center text-muted mt-5 mb-0">Уже зарегистрированы? <a href="#!"
                                                                                                      class="fw-bold text-body"><u>Войти</u></a></p>
                             </form>

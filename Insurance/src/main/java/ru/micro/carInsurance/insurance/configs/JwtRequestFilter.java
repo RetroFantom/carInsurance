@@ -1,15 +1,14 @@
-package ru.micro.carinsurance.securityjwt.configs;
+package ru.micro.carInsurance.insurance.configs;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 import lombok.RequiredArgsConstructor;
-//import lombok.extern.slf4j.Slf4j;
+import ru.micro.carInsurance.insurance.utils.JwtTokenUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import ru.micro.carinsurance.securityjwt.utils.JwtTokenUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -18,11 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-import static ru.micro.carinsurance.securityjwt.services.AuthService.audit;
+
+import static ru.micro.carInsurance.insurance.service.InsuranceService.audit;
 
 @Component
 @RequiredArgsConstructor
-
 public class JwtRequestFilter extends OncePerRequestFilter {
     private final JwtTokenUtils jwtTokenUtils;
 
@@ -36,9 +35,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             try {
                 username = jwtTokenUtils.getUsername(jwt);
             } catch (ExpiredJwtException e) {
-             audit("Token lifetime over");
+                audit("Token lifetime over");
             } catch (SignatureException e) {
-            audit("Wrong token record");
+           audit("Wrong token record");
             }
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -52,3 +51,4 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 }
+

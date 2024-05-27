@@ -1,4 +1,3 @@
-
 server:
   port: 8798
 
@@ -10,36 +9,52 @@ logging:
       springframework:
         cloud:
           gateway: TRACE
+  file.name: logGateway.txt
 
 spring:
- cloud:
-  gateway:
-   httpserver:
-    wiretap: true
-   httpclient:
-    wiretap: true
-    ssl:
-     useInsecureTrustManager: true
-   routes:
-   - id: registration
-     uri: http://localhost:9091
-     predicates:
-       - Path=/registration
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      httpserver:
+        wiretap: true
+      httpclient:
+        wiretap: true
+        ssl:
+          useInsecureTrustManager: true
+      routes:
+        - id: /
+          uri: http://localhost:9091
+          predicates:
+            - Path=/
 
-   - id: auth
-     uri: http://localhost:9091
-     predicates:
-       - Path=/auth
-   - id: login
-     uri: http://localhost:9091
-     predicates:
-       - Path=/login
-       - Path=/success-login
-   - id: home
-     uri: http://localhost:9091
-     predicates:
-       - Path=/
-   - id: /styles/css/
+        - id: registration
+          uri: http://localhost:9091
+          predicates:
+            - Path=/registration
 
- application:
-   name: gateway
+        - id: login
+          uri: http://localhost:9091
+          predicates:
+            - Path=/login
+
+        - id: insurance
+          uri: http://localhost:9090
+          predicates:
+            - Path=/insurance/**
+
+        - id: /styles/css/
+          uri: http://localhost:9091
+          predicates:
+            - Path=/styles/css/**
+
+        - id: /images/
+          uri: http://localhost:9091
+          predicates:
+            - Path=/images/**
+
+        - id: /js/
+          uri: http://localhost:9091
+          predicates:
+            - Path=/js/**
+

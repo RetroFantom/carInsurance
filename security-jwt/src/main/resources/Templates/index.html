@@ -13,7 +13,43 @@
     <ul class="nav">
         <li><a href="/login">Войти в систему</a></li>
         <li><a href="/registration">Зарегистрироваться</a></li>
+        <li><a href="http://localhost/insurance/add" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Добавить карту</a></li>
+        <li><button onclick="allInsurances()" type="button" role="button" aria-pressed="true">Показать все карты</button></li>
+        <!-- кнопка для выхода -->
+        <li><button onclick="exit()" type="button" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">Выход</button></li>
     </ul>
 </div>
+<div id="content"></div>
+<script>function allInsurances() {
+    let token = localStorage.getItem("token");
+
+    const tokenParts = token.split('.');
+    const decodedPayload = JSON.parse(atob(tokenParts[1]));
+    const Id = decodedPayload.Id;
+
+    const contentDiv = document.getElementById("content");
+
+// создаём новый экземпляр запроса XHR
+    const xhr = new XMLHttpRequest();
+    xhr.onload = () => {
+        if (xhr.status == 200) {
+            contentDiv.innerHTML = xhr.responseText;  // выводим полученный ответ в contentDiv
+        } else {                                // иначе выводим текст статуса
+            console.log("Server response: ", xhr.statusText);
+        }
+    };
+// открываем соединение
+    xhr.open('GET', 'http://localhost:8798/insurance/all/' + Id, true);
+// устанавливаем заголовок — выбираем тип контента, который отправится на сервер, в нашем случае мы явно пишем, что это JSON
+    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+// когда всё готово, отправляем JSON на сервер
+    xhr.send();
+}
+
+function exit() {
+    localStorage.clear();
+}
+
+</script>
 </body>
 </html>

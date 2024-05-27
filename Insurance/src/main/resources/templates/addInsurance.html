@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+    <!-- подключаем бутстрап -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+<!-- вся страница будет в одном контейнере -->
+<div class="container">
+    <div class="row">
+        <!-- делаем самую простую вёрстку -->
+        <div class="col-md-12">
+            <h2>Добавление страховки</h2>
+            <p>Заполните все поля, чтобы добавить карту.</p>
+            <!-- форма регистрации -->
+            <form>
+                <!-- поле ввода номера карты -->
+                <div class="form-group">
+                    <label>VIN</label>
+                    <input type="text" id="VIN" name="number" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Регистрационный номер авто</label>
+                    <input type="text" id="car_Plate" name="number" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>ФИО</label>
+                    <input type="text" id="FIO" name="number" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Номер прав</label>
+                    <input type="text" id="driver_licence" name="number" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>СТС</label>
+                    <input type="text" id="STS" name="number" class="form-control" required>
+                </div>
+
+
+                <!-- кнопка отправки данных на сервер -->
+                <div class="form-group">
+                    <button class="btn btn-primary" onclick="sendJSON()">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- скрипт, который обработает нажатие на кнопку и отправит данные на сервер -->
+<script>
+    // эта функция сработает при нажатии на кнопку
+    function sendJSON() {
+        let token = localStorage.getItem("token");
+        const tokenParts = token.split('.');
+        const decodedPayload = JSON.parse(atob(tokenParts[1]));
+        const Id = decodedPayload.Id;
+        // с помощью jQuery обращаемся к элементам на странице по их именам
+        let VIN = document.getElementById("VIN").value;
+        let car_plate = document.getElementById("car_Plate").value;
+        let FIO = document.getElementById("FIO").value;
+        let driver_licence = document.getElementById("driver_licence").value;
+        let STS = document.getElementById("STS").value;
+        // создаём новый экземпляр запроса XHR
+        const xhr = new XMLHttpRequest();
+        // преобразуем наши данные JSON в строку
+        const data = JSON.stringify({userId: Id, VIN: VIN, carPlate: car_plate, FIO: FIO, driverLicence: driver_licence, STS: STS});
+        // открываем соединение
+        xhr.open('POST', 'http://localhost:8798/insurance/add', true);
+        // устанавливаем заголовок — выбираем тип контента, который отправится на сервер, в нашем случае мы явно пишем, что это JSON
+        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        // когда всё готово, отправляем JSON на сервер
+        xhr.send(data);
+    }
+</script>
+</body>
+</html>
