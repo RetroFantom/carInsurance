@@ -47,7 +47,7 @@ public class InsuranceService {
     }
 
     public List<Insurance> findByUserId(Long id) {
-        audit("List of insurances sent");
+        audit("List of insurances sent for user with id" + id);
         return insuranceRepository.findByUserId(id);
     }
 
@@ -60,7 +60,7 @@ public class InsuranceService {
         insurance.setFIO(insuranceDto.getFIO());
         insurance.setDriverLicence(insuranceDto.getDriverLicence());
         insurance.setSTS(insuranceDto.getSTS());
-        audit("Insurance added");
+        audit("Insurance added for user with id " + insurance.getUserId());
         return insuranceRepository.save(insurance);
     }
 }

@@ -7,15 +7,16 @@
 </head>
 <body style="background-image: url(/images/jp.jpg); background-repeat: no-repeat;  background-size: cover; background-position: top center;  background-size: cover; background-attachment: fixed">
 <div class="upper" style="border-style: double">
-    <a href="/"><img src="/images/img.png" alt="Здесь логотип" class="logoImg"></a>
+    <a href="/"><img src="/images/img.png" alt="Здесь логотип" class="logoImgHome"></a>
     <section id="tl"><span class="head">Автострахование у Сереги</span></section>
     <ul class="nav">
-        <li><a href="/login">Войти в систему</a></li>
-        <li><a href="/registration">Зарегистрироваться</a></li>
-        <li><a href="http://localhost:8798/insurance/add" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Добавить страховку</a></li>
         <li><button onclick="allInsurances()" type="button" role="button" aria-pressed="true">Показать все страховки</button></li>
-        <!-- кнопка для выхода -->
         <li><button onclick="exit()" type="button" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">Выход</button></li>
+    </ul>
+    <ul class="nav">
+        <li><a href="/login"  class="smt">Войти в систему</a></li>
+        <li><a href="/registration"  class="smt">Зарегистрироваться</a></li>
+        <li><a href="http://localhost:8798/insurance/add" class="smt" role="button" aria-pressed="true">Добавить страховки</a></li>
     </ul>
 </div>
 <div id="insurancesTable"></div>
