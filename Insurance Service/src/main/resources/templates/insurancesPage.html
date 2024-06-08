@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Страховки</title>
+</head>
+<body>
+<div class="ins"><h2>Страховки пользователя</h2></div>
+<table class="ins">
+    <tr>
+        <th>VIN</th>
+        <th>Регистрационный номер</th>
+        <th>ФИО</th>
+        <th>Номер прав</th>
+        <th>СТС</th>
+    </tr>
+    <tr th:each ="insurance : ${insurances}">
+        <td th:utext="${insurance.VIN}">...</td>
+        <td th:utext="${insurance.carPlate}">...</td>
+        <td th:utext="${insurance.FIO}">...</td>
+        <td th:utext="${insurance.driverLicence}">...</td>
+        <td th:utext="${insurance.STS}">...</td>
+    </tr>
+</table>
+</body>
+</html>

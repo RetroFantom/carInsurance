@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8" content="text/html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автострахование</title>
+    <link rel="stylesheet" type="text/css" href="/styles/css/mainstyle.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body style="background-image: url(/images/jp.jpg); background-repeat: no-repeat;  background-size: cover; background-position: top center;  background-size: cover; background-attachment: fixed">
+<div class="upper" style="border-style: double">
+    <a href="/"><img src="/images/img.png" alt="Здесь логотип" class="logoImgLogin"></a>
+    <section id="tl"><span class="head">Автострахование у Сереги</span></section>
+    <ul class="nav">
+        <li><a href="/registration">Зарегистрироваться</a></li>
+    </ul>
+</div>
+<section class="vh-100 bg-image">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="insurance" style="border-radius: 15px;">
+                        <div class="insurance-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Войти в систему</h2>
+                            <form class="registration" th:action="@{/login}" th:object="${JwtRequest}" method="POST">
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <input type="text" id="form3Example1cg" name="username" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example1cg">Имя</label>
+                                </div>
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <input type="password" name="password" id="form3Example4cg" class="form-control form-control-lg" />
+                                    <label class="form-label" for="form3Example4cg">Пароль</label>
+                                </div>
+                                <div class="sub"><input class="reg" type="submit" value="Войти"/></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+</html>
